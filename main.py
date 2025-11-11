@@ -5,13 +5,13 @@ import time
 import json
 from datetime import datetime, timedelta
 
-from quiz_module import QuizFeature
-from flashcard_module import FlashcardFeature
-from schedule_module import ScheduleFeature
-from todo_module import TodoFeature
-from citation_module import CitationFeature
-from pomodoro_module import PomodoroFeature
-from wordcounter_module import WordCounterFeature
+from Feature.quiz_module import QuizFeature
+from Feature.flashcard_module import FlashcardFeature
+from Feature.schedule_module import ScheduleFeature
+from Feature.todo_module import TodoFeature
+from Feature.citation_module import CitationFeature
+from Feature.pomodoro_module import PomodoroFeature
+from Feature.wordcounter_module import WordCounterFeature
 
 class StudentHelper(
     QuizFeature, 
