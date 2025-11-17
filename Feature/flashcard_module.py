@@ -1,4 +1,3 @@
-# flashcard_module.py
 from datetime import datetime
 
 class FlashcardFeature:
@@ -16,7 +15,11 @@ class FlashcardFeature:
             print("0. Kembali")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-4]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 4."
+            )
             
             if choice == '1':
                 self.create_flashcard()
@@ -116,7 +119,12 @@ class FlashcardFeature:
             if idx < 0 or idx >= len(self.flashcards):
                 raise ValueError
             
-            confirm = input(f"Hapus flashcard '{self.flashcards[idx]['category']}'? (y/n): ")
+            confirm = self.get_validated_input(
+                f"Hapus flashcard '{self.flashcards[idx]['category']}'? (y/n): ",
+                r"^[ynYN]$",
+                "Input tidak valid. Harap masukkan 'y' atau 'n'."
+            )
+            
             if confirm.lower() == 'y':
                 deleted = self.flashcards.pop(idx)
                 self.save_data()

@@ -1,4 +1,3 @@
-# schedule_module.py
 from datetime import datetime
 
 class ScheduleFeature:
@@ -17,7 +16,11 @@ class ScheduleFeature:
             print("0. Kembali")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-5]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 5."
+            )
             
             if choice == '1':
                 self.add_schedule()
@@ -37,9 +40,25 @@ class ScheduleFeature:
         print("=== TAMBAH JADWAL KULIAH ===")
         
         course = input("Nama Mata Kuliah: ")
-        day = input("Hari (Senin/Selasa/Rabu/Kamis/Jumat/Sabtu/Minggu): ")
-        start_time = input("Waktu Mulai (HH:MM): ")
-        end_time = input("Waktu Selesai (HH:MM): ")
+        
+        day = self.get_validated_input(
+            "Hari (Senin/Selasa/Rabu/Kamis/Jumat/Sabtu/Minggu): ",
+            r"^(Senin|Selasa|Rabu|Kamis|Jumat|Sabtu|Minggu)$",
+            "Nama hari tidak valid. Gunakan huruf kapital di awal (Contoh: Senin)."
+        )
+        
+        start_time = self.get_validated_input(
+            "Waktu Mulai (HH:MM): ",
+            r"^([01]\d|2[0-3]):([0-5]\d)$",
+            "Format waktu harus HH:MM (Contoh: 08:00 atau 14:30)."
+        )
+        
+        end_time = self.get_validated_input(
+            "Waktu Selesai (HH:MM): ",
+            r"^([01]\d|2[0-3]):([0-5]\d)$",
+            "Format waktu harus HH:MM (Contoh: 10:00 atau 16:30)."
+        )
+        
         room = input("Ruangan: ")
         lecturer = input("Dosen: ")
         
@@ -121,7 +140,12 @@ class ScheduleFeature:
             if idx < 0 or idx >= len(self.schedules):
                 raise ValueError
             
-            confirm = input(f"Hapus jadwal '{self.schedules[idx]['course']}'? (y/n): ")
+            confirm = self.get_validated_input(
+                f"Hapus jadwal '{self.schedules[idx]['course']}'? (y/n): ",
+                r"^[ynYN]$",
+                "Input tidak valid. Harap masukkan 'y' atau 'n'."
+            )
+
             if confirm.lower() == 'y':
                 deleted = self.schedules.pop(idx)
                 self.save_data()

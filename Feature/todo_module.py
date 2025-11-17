@@ -1,4 +1,3 @@
-# todo_module.py
 from datetime import datetime
 
 class TodoFeature:
@@ -17,7 +16,11 @@ class TodoFeature:
             print("0. Kembali")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-5]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 5."
+            )
             
             if choice == '1':
                 self.add_todo()
@@ -37,8 +40,19 @@ class TodoFeature:
         print("=== TAMBAH TUGAS BARU ===")
         
         task = input("Nama Tugas: ")
-        priority = input("Prioritas (Tinggi/Sedang/Rendah): ")
-        deadline = input("Deadline (YYYY-MM-DD, kosongkan jika tidak ada): ")
+        
+        priority = self.get_validated_input(
+            "Prioritas (Tinggi/Sedang/Rendah): ",
+            r"^(Tinggi|Sedang|Rendah)$",
+            "Input tidak valid. Harap masukkan 'Tinggi', 'Sedang', atau 'Rendah'."
+        )
+        
+        deadline = self.get_validated_input(
+            "Deadline (YYYY-MM-DD, kosongkan jika tidak ada): ",
+            r"^(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))?$",
+            "Format tanggal harus YYYY-MM-DD atau biarkan kosong."
+        )
+
         notes = input("Catatan (opsional): ")
         
         self.todos.append({
@@ -121,7 +135,12 @@ class TodoFeature:
             if idx < 0 or idx >= len(self.todos):
                 raise ValueError
             
-            confirm = input(f"Hapus tugas '{self.todos[idx]['task']}'? (y/n): ")
+            confirm = self.get_validated_input(
+                f"Hapus tugas '{self.todos[idx]['task']}'? (y/n): ",
+                r"^[ynYN]$",
+                "Input tidak valid. Harap masukkan 'y' atau 'n'."
+            )
+
             if confirm.lower() == 'y':
                 deleted = self.todos.pop(idx)
                 self.save_data()

@@ -1,4 +1,3 @@
-# pomodoro_module.py
 import time
 
 class PomodoroFeature:
@@ -15,9 +14,13 @@ class PomodoroFeature:
             work_minutes = int(input("Durasi kerja (menit) [default: 25]: ") or "25")
             break_minutes = int(input("Durasi istirahat (menit) [default: 5]: ") or "5")
             cycles = int(input("Jumlah siklus [default: 4]: ") or "4")
-        except:
-            print("Input tidak valid!")
-            input("Tekan Enter untuk lanjut...")
+            
+            if work_minutes <= 0 or break_minutes <= 0 or cycles <= 0:
+                raise ValueError("Angka harus lebih besar dari 0")
+                
+        except ValueError as e:
+            print(f"Input tidak valid! {e}")
+            input("\nTekan Enter untuk lanjut...")
             return
         
         for cycle in range(1, cycles + 1):

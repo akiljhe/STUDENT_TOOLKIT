@@ -17,7 +17,11 @@ class QuizFeature:
             print("0. Kembali")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-4]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 4."
+            )
             
             if choice == '1':
                 self.create_quiz()
@@ -47,10 +51,11 @@ class QuizFeature:
                 opt = input(f"Opsi {chr(65+i)}: ")
                 options.append(opt)
             
-            correct = input("Jawaban benar (A/B/C/D): ").upper()
-            if correct not in ['A', 'B', 'C', 'D']:
-                print("Jawaban tidak valid, soal diabaikan.")
-                continue    
+            correct = self.get_validated_input(
+                "Jawaban benar (A/B/C/D): ",
+                r"^[AaBbCcDd]$",
+                "Pilihan tidak valid. Harap masukkan A, B, C, atau D."
+            ).upper()
             
             questions.append({
                 'question': question,
@@ -102,7 +107,11 @@ class QuizFeature:
             for j, opt in enumerate(q['options']):
                 print(f"  {chr(65+j)}. {opt}")
             
-            answer = input("\nJawaban Anda (A/B/C/D): ").upper()
+            answer = self.get_validated_input(
+                "\nJawaban Anda (A/B/C/D): ",
+                r"^[AaBbCcDd]$",
+                "Pilihan tidak valid. Harap masukkan A, B, C, atau D."
+            ).upper()
             
             if answer == q['correct']:
                 print("✓ Benar!")
@@ -140,7 +149,12 @@ class QuizFeature:
             if idx < 0 or idx >= len(self.quizzes):
                 raise ValueError
             
-            confirm = input(f"Hapus quiz '{self.quizzes[idx]['title']}'? (y/n): ")
+            confirm = self.get_validated_input(
+                f"Hapus quiz '{self.quizzes[idx]['title']}'? (y/n): ",
+                r"^[ynYN]$",
+                "Input tidak valid. Harap masukkan 'y' atau 'n'."
+            )
+            
             if confirm.lower() == 'y':
                 deleted = self.quizzes.pop(idx)
                 self.save_data()

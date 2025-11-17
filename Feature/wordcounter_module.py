@@ -1,5 +1,3 @@
-# wordcounter_module.py
-
 class WordCounterFeature:
 
     def word_counter_menu(self):
@@ -13,7 +11,11 @@ class WordCounterFeature:
             print("0. Kembali")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-2]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 2."
+            )
             
             if choice == '1':
                 self.count_words_input()

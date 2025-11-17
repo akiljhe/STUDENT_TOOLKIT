@@ -1,10 +1,10 @@
-
-
 import os
 import time
 import json
+import re
 from datetime import datetime, timedelta
 
+from Feature import schedule_module
 from Feature.quiz_module import QuizFeature
 from Feature.flashcard_module import FlashcardFeature
 from Feature.schedule_module import ScheduleFeature
@@ -16,7 +16,7 @@ from Feature.wordcounter_module import WordCounterFeature
 class StudentHelper(
     QuizFeature, 
     FlashcardFeature, 
-    ScheduleFeature, 
+    schedule_module, 
     TodoFeature, 
     CitationFeature, 
     PomodoroFeature, 
@@ -54,6 +54,14 @@ class StudentHelper(
     def clear_screen(self):
         os.system('clear' if os.name == 'posix' else 'cls')
     
+    def get_validated_input(self, prompt, regex_pattern, error_message):
+        while True:
+            user_input = input(prompt)
+            if re.match(regex_pattern, user_input):
+                return user_input
+            else:
+                print(f"✗ Error: {error_message}")
+    
     def run(self):
         while True:
             self.clear_screen()
@@ -70,7 +78,11 @@ class StudentHelper(
             print("0. Keluar")
             print("=" * 50)
             
-            choice = input("Pilih menu: ")
+            choice = self.get_validated_input(
+                "Pilih menu: ",
+                r"^[0-7]$",
+                "Input tidak valid. Harap masukkan angka antara 0 dan 7."
+            )
             
             if choice == '1':
                 self.quiz_menu()

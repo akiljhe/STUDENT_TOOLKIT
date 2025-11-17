@@ -1,71 +1,23 @@
 {
   "flashcards": [],
-  "quizzes": [
+  "quizzes": [],
+  "schedules": [
     {
-      "title": "1",
-      "questions": [
-        {
-          "question": "1",
-          "options": [
-            "1",
-            "1",
-            "1",
-            "1"
-          ],
-          "correct": "1"
-        }
-      ],
-      "created": "2025-11-11T10:24:32.895429"
+      "course": "shdgdhg",
+      "day": "hshss",
+      "start_time": "09:00",
+      "end_time": "10:00",
+      "room": "2",
+      "lecturer": "hshs"
     },
     {
-      "title": "1",
-      "questions": [
-        {
-          "question": "1",
-          "options": [
-            "1",
-            "1",
-            "1",
-            "1"
-          ],
-          "correct": "1"
-        }
-      ],
-      "created": "2025-11-11T10:27:02.812744"
-    },
-    {
-      "title": "1",
-      "questions": [
-        {
-          "question": "1",
-          "options": [
-            "1",
-            "11",
-            "1",
-            "1"
-          ],
-          "correct": "1"
-        }
-      ],
-      "created": "2025-11-11T10:27:15.260272"
-    },
-    {
-      "title": "1",
-      "questions": [
-        {
-          "question": "1",
-          "options": [
-            "1",
-            "1",
-            "1",
-            "1"
-          ],
-          "correct": "1"
-        }
-      ],
-      "created": "2025-11-11T10:27:36.919283"
+      "course": "ap",
+      "day": "senim",
+      "start_time": "abc",
+      "end_time": "abc",
+      "room": "12",
+      "lecturer": "sdawe"
     }
   ],
-  "schedules": [],
   "todos": []
 }
